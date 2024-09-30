@@ -28,6 +28,12 @@ steps:
     pip install -r requirements.txt
   displayName: 'Install Python dependencies'
 
+- powershell: |
+    if (Test-Path "dist\automation.exe") {
+      Remove-Item "dist\automation.exe"
+    }
+  displayName: "Remove existing Automation"
+
 - script: |
     pyinstaller --onefile automation_task.py
   displayName: 'Build .exe from Python script'
